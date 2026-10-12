@@ -13,7 +13,7 @@ export default function BillList({ patientId }) {
   }, [patientId]);
 
   if (loading) return <Spinner />;
-  if (!items.length) return <EmptyState message="No bills" icon="ðŸ§¾" />;
+  if (!items.length) return <EmptyState message="No bills" icon="🧾" />;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>

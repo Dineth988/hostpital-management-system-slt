@@ -157,7 +157,7 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
                 )}
               </div>
             )}
-            {errors.patient && <div className="form-error">Ã¢Å¡  {errors.patient}</div>}
+            {errors.patient && <div className="form-error">⚠ {errors.patient}</div>}
           </div>
 
           {/* Doctor selection */}
@@ -181,7 +181,7 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
                 </button>
               ))}
             </div>
-            {errors.doctor && <div className="form-error">Ã¢Å¡  {errors.doctor}</div>}
+            {errors.doctor && <div className="form-error">⚠ {errors.doctor}</div>}
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -196,7 +196,7 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
       {step === 'slot' && (
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 12px', background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius)', marginBottom: '16px' }}>
-            <span style={{ fontSize: '16px' }}>Ã°Å¸Â©Âº</span>
+            <span style={{ fontSize: '16px' }}>🩺</span>
             <div>
               <div style={{ fontSize: '13px', fontWeight: 500 }}>{selectedDoctor.name}</div>
               <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{selectedDoctor.specialty} Ã· LKR {selectedDoctor.consultFee.toLocaleString()}</div>
@@ -248,12 +248,12 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
                   </button>
                 ))}
               </div>
-              {errors.slot && <div className="form-error" style={{ marginTop: '8px' }}>Ã¢Å¡  {errors.slot}</div>}
+              {errors.slot && <div className="form-error" style={{ marginTop: '8px' }}>⚠ {errors.slot}</div>}
             </div>
           )}
 
           <div style={{ display: 'flex', gap: '8px', marginTop: '20px', justifyContent: 'space-between' }}>
-            <button className="btn btn-secondary" onClick={() => setStep('doctor')}>←
+            <button className="btn btn-secondary" onClick={() => setStep('doctor')}>←</button>
             <button className="btn btn-primary" onClick={() => { if (!selectedSlot) { setErrors(e => ({ ...e, slot: 'Select a time slot' })); return; } setStep('confirm'); }}>
               Next: Confirm →
             </button>
@@ -282,7 +282,7 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
 
           <div className="form-group">
             <label className="form-label">Reason / Notes</label>
-            <input className="form-input" value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. Follow-up, ConsultationÃ¢â¬Â¦" />
+            <input className="form-input" value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. Follow-up, Consultation…" />
           </div>
 
           <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '16px', padding: '10px 12px', background: 'var(--accent-subtle)', border: '1px solid rgba(245,158,11,0.2)', borderRadius: 'var(--radius)' }}>
