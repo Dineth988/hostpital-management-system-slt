@@ -1,4 +1,4 @@
-ï»¿import React from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { AppProvider } from './context/AppContext.jsx';

@@ -1,4 +1,4 @@
-ï»¿import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { appointments as apptApi, patients as patientsApi, doctors as doctorsApi, fmt } from '../api/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useApp } from '../context/AppContext.jsx';

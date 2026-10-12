@@ -1,4 +1,4 @@
-ï»¿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fmt } from '../api/api.js';
 
 const REQUIRED_FIELDS = ['name', 'dob', 'gender', 'phone'];

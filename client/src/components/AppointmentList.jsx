@@ -1,4 +1,4 @@
-ï»¿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { appointments as apptApi, fmt } from '../api/api.js';
 import { useApp } from '../context/AppContext.jsx';
 import { EmptyState, Spinner } from './PatientDrawer.jsx';

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { bills as billsApi, fmt } from '../api/api.js';
 import { useApp } from '../context/AppContext.jsx';
 import { EmptyState, Spinner } from './PatientDrawer.jsx';

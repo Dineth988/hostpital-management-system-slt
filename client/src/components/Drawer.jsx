@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function Drawer({ title, onClose, footer, children, width = 520 }) {
   const ref = useRef(null);
