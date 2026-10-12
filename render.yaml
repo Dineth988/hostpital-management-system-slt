@@ -18,7 +18,7 @@ services:
       - key: JWT_SECRET
         generateValue: true  # Render auto-generates a secure value
       - key: CLIENT_ORIGIN
-        value: https://hms-client.onrender.com
+        value: https://hms-client-rxof.onrender.com
       - key: PORT
         value: 10000
 
@@ -32,7 +32,7 @@ services:
     pullRequestPreviewsEnabled: true
     envVars:
       - key: VITE_API_URL
-        value: https://hms-api.onrender.com/api/v1
+        value: https://hms-api-3xmf.onrender.com/api/v1
     routes:
       - type: rewrite
         source: /*
