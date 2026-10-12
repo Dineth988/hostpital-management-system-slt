@@ -1,0 +1,169 @@
+/* ==========================================================================
+   Additional component-specific styles, animations and utility classes
+   ========================================================================== */
+
+/* Today board responsive */
+@media (max-width: 900px) {
+  .today-board {
+    grid-template-columns: 1fr !important;
+    overflow-y: auto;
+  }
+}
+
+/* Appointment card animations */
+.appt-card-enter {
+  animation: cardEnter 0.2s ease;
+}
+@keyframes cardEnter {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Dense table row action gutter */
+.dense-table td:last-child {
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* Form input focus ring override for accessibility */
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
+}
+
+/* Slot grid */
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+/* Drawer wide variant */
+.drawer-wide {
+  width: 680px;
+}
+
+/* Live time mono-space digit fix */
+.live-time {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Nav badge counter */
+.nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  margin-left: 4px;
+}
+
+/* Kanban column scroll area */
+.kanban-col-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+/* Data info grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.info-grid-row {
+  display: contents;
+}
+.info-grid-row > * {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 12px;
+}
+.info-grid-row:last-child > * {
+  border-bottom: none;
+}
+.info-grid-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+}
+.info-grid-value {
+  color: var(--text-primary);
+}
+
+/* Pill group for status filter */
+.pill-group {
+  display: inline-flex;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.pill-group button {
+  border: none;
+  border-right: 1px solid var(--border-medium);
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+.pill-group button:last-child {
+  border-right: none;
+}
+.pill-group button.active {
+  background: var(--accent-muted);
+  color: var(--accent);
+  font-weight: 600;
+}
+.pill-group button:hover:not(.active) {
+  background: var(--bg-surface-elevated);
+}
+
+/* Loading skeleton */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+.skeleton {
+  background: var(--bg-surface-elevated);
+  border-radius: var(--radius-sm);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+/* Responsive: tablet 768px */
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0 10px;
+    gap: 8px;
+  }
+  .nav-tab {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+  .command-bar-trigger span:first-of-type {
+    display: none;
+  }
+  .dense-table th:nth-child(n+4),
+  .dense-table td:nth-child(n+4) {
+    display: none;
+  }
+}
