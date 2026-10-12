@@ -13,16 +13,20 @@ export default function BillingPage() {
   const { can } = useAuth();
   const { openDrawer } = useApp();
 
+  const [error, setError] = useState(null);
   const load = useCallback(async () => {
     setLoading(true);
+    setError(null);
     try {
       const statuses = statusFilter ? statusFilter.split(',') : undefined;
       const billList = await billsApi.list({ status: statuses });
       setBills(billList);
-      const uniquePids = [...new Set(billList.map(b => b.patientId))];
+      const uniquePids = [...new Set(billList.map(b => b.patientId).filter(Boolean))];
       const pMap = {};
       await Promise.all(uniquePids.map(pid => patientsApi.get(pid).then(p => { pMap[pid] = p; }).catch(() => {})));
       setPatients(pMap);
+    } catch (err) {
+      setError(err.message || 'Failed to load bills');
     } finally {
       setLoading(false);
     }
@@ -49,13 +53,18 @@ export default function BillingPage() {
           <option value="PAID">Paid</option>
           <option value="">All</option>
         </select>
-        <button className="btn btn-subtle btn-sm" onClick={load}>Ã¢â Âº Refresh</button>
+        <button className="btn btn-subtle btn-sm" onClick={load}>↻ Refresh</button>
       </div>
 
       {/* List */}
       <div style={{ flex: 1, overflowY: 'auto' }}>
         {loading ? (
           <div style={{ padding: '40px', display: 'flex', justifyContent: 'center' }}><Spinner /></div>
+        ) : error ? (
+          <div style={{ textAlign: 'center', padding: '60px', color: 'var(--status-cancelled-text)' }}>
+            <div style={{ fontSize: '13px' }}>⚠ {error}</div>
+            <button className="btn btn-subtle btn-sm" style={{ marginTop: '12px' }} onClick={load}>Retry</button>
+          </div>
         ) : bills.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '60px', color: 'var(--text-muted)' }}>
             <div style={{ fontSize: '32px', marginBottom: '8px' }}>🎉</div>
@@ -76,7 +85,7 @@ export default function BillingPage() {
               </tr>
             </thead>
             <tbody>
-              {bills.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).map(bill => {
+              {bills.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || '')).map(bill => {
                 const patient = patients[bill.patientId];
                 const balance = Math.max(0, bill.total - bill.amountPaid);
                 return (
@@ -87,13 +96,13 @@ export default function BillingPage() {
                     <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>{fmt.lkr(bill.total)}</td>
                     <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--status-checkedin-text)' }}>{fmt.lkr(bill.amountPaid)}</td>
                     <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: balance > 0 ? 700 : 400, color: balance > 0 ? 'var(--status-unpaid-text)' : 'var(--text-muted)' }}>
-                      {balance > 0 ? fmt.lkr(balance) : 'Ã¢â¬”'}
+                      {balance > 0 ? fmt.lkr(balance) : "—"}
                     </td>
                     <td><BillStatusBadge status={bill.status} /></td>
                     <td onClick={e => e.stopPropagation()}>
                       {can('bill:pay') && bill.status !== 'PAID' && bill.status !== 'VOID' && (
                         <button className="btn btn-primary btn-sm" onClick={() => openDrawer('bill-detail', { billId: bill.id, onUpdate: load })}>
-                          Pay Ã¢â â
+                          Pay →
                         </button>
                       )}
                     </td>
