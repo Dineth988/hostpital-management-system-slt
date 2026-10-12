@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+ï»¿import React, { useState, useEffect, useCallback } from 'react';
 import { patients as patientsApi, fmt } from '../api/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useApp } from '../context/AppContext.jsx';
@@ -38,7 +38,7 @@ export default function PatientsPage() {
           <input
             className="form-input" style={{ paddingLeft: '28px', height: '30px' }}
             value={search} onChange={e => setSearch(e.target.value)}
-            placeholder="Search name, NIC, phone, patient IDâ€¦"
+            placeholder="Search name, NIC, phone, patient IDÃ¢â¬Â¦"
           />
         </div>
         <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: 'var(--text-secondary)', cursor: 'pointer', whiteSpace: 'nowrap' }}>
@@ -57,7 +57,7 @@ export default function PatientsPage() {
           <div style={{ padding: '40px', display: 'flex', justifyContent: 'center' }}><Spinner /></div>
         ) : patients.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '60px', color: 'var(--text-muted)' }}>
-            <div style={{ fontSize: '32px', marginBottom: '8px' }}>ðŸ‘¤</div>
+            <div style={{ fontSize: '32px', marginBottom: '8px' }}>👤</div>
             <div style={{ fontSize: '13px' }}>{search ? `No patients matching "${search}"` : 'No patients registered'}</div>
             {can('patient:create') && !search && (
               <button className="btn btn-primary" style={{ marginTop: '12px' }} onClick={() => openDrawer('new-patient')}>Register First Patient</button>
@@ -87,7 +87,7 @@ export default function PatientsPage() {
                   <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
                     {fmt.age(p.dob)} <span style={{ color: 'var(--text-muted)' }}>{fmt.date(p.dob)}</span>
                   </td>
-                  <td style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-secondary)' }}>{p.nic || 'â€”'}</td>
+                  <td style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-secondary)' }}>{p.nic || 'Ã¢â¬”'}</td>
                   <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>{p.phone}</td>
                   <td>
                     {p.active
@@ -96,7 +96,7 @@ export default function PatientsPage() {
                   </td>
                   <td onClick={e => e.stopPropagation()}>
                     <button className="btn btn-subtle btn-sm" onClick={() => openDrawer('patient-detail', { patientId: p.id })}>
-                      View â†’
+                      View Ã¢â â
                     </button>
                     {can('appointment:create') && p.active && (
                       <button className="btn btn-subtle btn-sm" style={{ marginLeft: '4px' }} onClick={() => openDrawer('new-appointment', { prePatientId: p.id })}>

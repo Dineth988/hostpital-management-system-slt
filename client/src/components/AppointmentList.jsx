@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+ï»¿import React, { useState, useEffect } from 'react';
 import { appointments as apptApi, fmt } from '../api/api.js';
 import { useApp } from '../context/AppContext.jsx';
 import { EmptyState, Spinner } from './PatientDrawer.jsx';
@@ -13,7 +13,7 @@ export default function AppointmentList({ patientId }) {
   }, [patientId]);
 
   if (loading) return <Spinner />;
-  if (!items.length) return <EmptyState message="No appointments" icon="ðŸ“…" />;
+  if (!items.length) return <EmptyState message="No appointments" icon="Ã°Å¸“…" />;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>

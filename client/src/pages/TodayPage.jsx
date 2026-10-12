@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+ï»¿import React, { useState, useEffect, useCallback } from 'react';
 import { appointments as apptApi, patients as patientsApi, doctors as doctorsApi, fmt } from '../api/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useApp } from '../context/AppContext.jsx';
@@ -93,9 +93,9 @@ export default function TodayPage() {
   const inactiveAppts = filtered.filter(a => INACTIVE_STATUSES.includes(a.status));
 
   const columns = [
-    { id: 'SCHEDULED', label: 'Scheduled', icon: 'ðŸ•', color: 'var(--status-scheduled-text)' },
-    { id: 'CHECKED_IN', label: 'Checked In', icon: 'âœ…', color: 'var(--status-checkedin-text)' },
-    { id: 'COMPLETED', label: 'Completed', icon: 'ðŸ', color: 'var(--status-completed-text)' },
+    { id: 'SCHEDULED', label: 'Scheduled', icon: '🕐', color: 'var(--status-scheduled-text)' },
+    { id: 'CHECKED_IN', label: 'Checked In', icon: '✅', color: 'var(--status-checkedin-text)' },
+    { id: 'COMPLETED', label: 'Completed', icon: '🐍', color: 'var(--status-completed-text)' },
   ];
 
   const todayDisplay = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
@@ -108,7 +108,7 @@ export default function TodayPage() {
       <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--border-subtle)', background: 'var(--bg-surface)', display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
         <div>
           <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)' }}>Today's Board</div>
-          <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{todayDisplay} Â· {activeAppts.length} active</div>
+          <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{todayDisplay} Ã· {activeAppts.length} active</div>
         </div>
         <div style={{ flex: 1 }} />
         {/* Doctor filter (receptionist/admin) */}
@@ -123,7 +123,7 @@ export default function TodayPage() {
             + Book
           </button>
         )}
-        <button className="btn btn-subtle btn-sm" onClick={load}>â†º Refresh</button>
+        <button className="btn btn-subtle btn-sm" onClick={load}>Ã¢â Âº Refresh</button>
       </div>
 
       {/* Kanban board */}
@@ -169,17 +169,17 @@ export default function TodayPage() {
           display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 16px',
           background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', fontSize: '12px',
         }}>
-          <span style={{ transform: showInactive ? 'rotate(90deg)' : 'rotate(0)', transition: 'transform 0.15s', display: 'inline-block' }}>â€º</span>
-          <span>Cancelled &amp; No-show â€” {inactiveAppts.length} entries</span>
+          <span style={{ transform: showInactive ? 'rotate(90deg)' : 'rotate(0)', transition: 'transform 0.15s', display: 'inline-block' }}>Ã¢â¬Âº</span>
+          <span>Cancelled &amp; No-show Ã¢â¬” {inactiveAppts.length} entries</span>
         </button>
         {showInactive && (
           <div style={{ padding: '4px 12px 8px', display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
             {inactiveAppts.map(appt => (
               <div key={appt.id} style={{ display: 'flex', gap: '8px', alignItems: 'center', padding: '5px 10px', background: 'var(--bg-app)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius)', fontSize: '12px' }}>
                 <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>{appt.time}</span>
-                <span style={{ color: 'var(--text-secondary)' }}>{patients[appt.patientId]?.name || 'â€¦'}</span>
+                <span style={{ color: 'var(--text-secondary)' }}>{patients[appt.patientId]?.name || 'Ã¢â¬Â¦'}</span>
                 <StatusBadge status={appt.status} />
-                {appt.cancelReason && <span style={{ color: 'var(--text-muted)', fontSize: '11px' }}>â€” {appt.cancelReason}</span>}
+                {appt.cancelReason && <span style={{ color: 'var(--text-muted)', fontSize: '11px' }}>Ã¢â¬” {appt.cancelReason}</span>}
               </div>
             ))}
           </div>
@@ -209,21 +209,21 @@ function AppointmentCard({ appt, patient, doctor, onCheckIn, onCancel, onComplet
         {appt.walkIn && <span className="badge badge-walkin">Walk-in</span>}
         {appt.billId && (
           <button className="badge badge-bill" style={{ background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.25)', cursor: 'pointer' }} onClick={onViewBill}>
-            ðŸ§¾ Bill
+            🧾 Bill
           </button>
         )}
       </div>
       {/* Patient */}
       <div style={{ marginBottom: '2px' }}>
         <button type="button" onClick={onViewPatient} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'left' }}>
-          <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)' }}>{patient?.name || 'â€¦'}</span>
+          <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-primary)' }}>{patient?.name || 'Ã¢â¬Â¦'}</span>
           <span style={{ fontSize: '11px', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)', marginLeft: '6px' }}>{patient?.pid}</span>
         </button>
       </div>
       {/* Doctor */}
       {user.role !== 'DOCTOR' && (
         <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '6px' }}>
-          ðŸ©º {doctor?.name || 'â€”'}
+          🩺 {doctor?.name || '—'}
         </div>
       )}
       {appt.reason && <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginBottom: '6px', fontStyle: 'italic' }}>{appt.reason}</div>}

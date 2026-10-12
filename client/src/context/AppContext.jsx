@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useState, useCallback } from 'react';
+ï»¿import React, { createContext, useContext, useState, useCallback } from 'react';
 
 const AppContext = createContext(null);
 
@@ -49,7 +49,7 @@ function Toast({ message, type, onDismiss }) {
     }}>
       <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: c.text, flexShrink: 0 }} />
       <span style={{ fontSize: '13px', color: 'var(--text-primary)', flex: 1 }}>{message}</span>
-      <button onClick={onDismiss} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '2px', fontSize: '14px' }}>Ã—</button>
+      <button onClick={onDismiss} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '2px', fontSize: '14px' }}>Ã—</button>
       <style>{`@keyframes slideUpFade { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }`}</style>
     </div>
   );

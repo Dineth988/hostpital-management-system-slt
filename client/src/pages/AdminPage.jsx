@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+ï»¿import React, { useState, useEffect, useCallback } from 'react';
 import { doctors as doctorsApi, users as usersApi, audit as auditApi, fmt } from '../api/api.js';
 import { useApp } from '../context/AppContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -10,10 +10,10 @@ export default function AdminPage() {
   const { user } = useAuth();
 
   const tabs = [
-    { id: 'doctors', label: 'ðŸ©º Doctors' },
-    { id: 'schedules', label: 'ðŸ“… Schedules' },
-    { id: 'users', label: 'ðŸ‘¥ Users' },
-    { id: 'audit', label: 'ðŸ“‹ Audit Log' },
+    { id: 'doctors',   label: '🩺 Doctors' },
+    { id: 'schedules', label: '📅 Schedules' },
+    { id: 'users',     label: '👥 Users' },
+    { id: 'audit',     label: '📋 Audit Log' },
   ];
 
   return (
@@ -41,7 +41,7 @@ export default function AdminPage() {
   );
 }
 
-// â”€â”€ Doctors Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ã¢”â¬Ã¢”â¬ Doctors Tab Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬
 function DoctorsTab() {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -131,18 +131,18 @@ function DoctorFormDrawer({ doc, onClose, onSave }) {
         <div className="form-group">
           <label className="form-label">Full Name<span className="req">*</span></label>
           <input className={`form-input ${errors.name ? 'error' : ''}`} value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
-          {errors.name && <div className="form-error">âš  {errors.name}</div>}
+          {errors.name && <div className="form-error">Ã¢Å¡  {errors.name}</div>}
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 12px' }}>
           <div className="form-group">
             <label className="form-label">Specialty<span className="req">*</span></label>
             <input className={`form-input ${errors.specialty ? 'error' : ''}`} value={form.specialty} onChange={e => setForm(f => ({ ...f, specialty: e.target.value }))} />
-            {errors.specialty && <div className="form-error">âš  {errors.specialty}</div>}
+            {errors.specialty && <div className="form-error">Ã¢Å¡  {errors.specialty}</div>}
           </div>
           <div className="form-group">
             <label className="form-label">Consult Fee (LKR)<span className="req">*</span></label>
             <input className={`form-input ${errors.consultFee ? 'error' : ''}`} type="number" value={form.consultFee} onChange={e => setForm(f => ({ ...f, consultFee: parseFloat(e.target.value) }))} style={{ fontFamily: 'var(--font-mono)' }} />
-            {errors.consultFee && <div className="form-error">âš  {errors.consultFee}</div>}
+            {errors.consultFee && <div className="form-error">Ã¢Å¡  {errors.consultFee}</div>}
           </div>
           <div className="form-group">
             <label className="form-label">Slot (minutes)</label>
@@ -156,7 +156,7 @@ function DoctorFormDrawer({ doc, onClose, onSave }) {
           </div>
         </div>
 
-        <div style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em', marginBottom: '8px' }}>Schedule (Start â€“ End or leave blank)</div>
+        <div style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em', marginBottom: '8px' }}>Schedule (Start Ã¢â¬“ End or leave blank)</div>
         {DAYS.map(day => (
           <div key={day} style={{ display: 'grid', gridTemplateColumns: '40px 1fr 1fr', gap: '8px', alignItems: 'center', marginBottom: '6px' }}>
             <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-secondary)' }}>{day}</span>
@@ -171,14 +171,14 @@ function DoctorFormDrawer({ doc, onClose, onSave }) {
 
         <div style={{ display: 'flex', gap: '8px', marginTop: '20px', justifyContent: 'flex-end' }}>
           <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>
-          <button type="submit" className="btn btn-primary" disabled={saving}>{saving ? 'Savingâ€¦' : 'Save Doctor'}</button>
+          <button type="submit" className="btn btn-primary" disabled={saving}>{saving ? 'SavingÃ¢â¬Â¦' : 'Save Doctor'}</button>
         </div>
       </form>
     </Drawer>
   );
 }
 
-// â”€â”€ Schedules / Leave Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ã¢”â¬Ã¢”â¬ Schedules / Leave Tab Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬
 function SchedulesTab() {
   const [doctors, setDoctors] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -238,7 +238,7 @@ function SchedulesTab() {
             return (
               <div key={day} style={{ display: 'flex', gap: '12px', padding: '6px 10px', background: h ? 'var(--bg-surface)' : 'transparent', borderRadius: 'var(--radius)', marginBottom: '3px' }}>
                 <span style={{ width: '30px', fontSize: '11px', fontWeight: 700, color: h ? 'var(--text-primary)' : 'var(--text-disabled)' }}>{day}</span>
-                {h ? <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--status-checkedin-text)' }}>{h[0]} â€“ {h[1]}</span>
+                {h ? <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--status-checkedin-text)' }}>{h[0]} Ã¢â¬“ {h[1]}</span>
                    : <span style={{ fontSize: '12px', color: 'var(--text-disabled)' }}>Off</span>}
               </div>
             );
@@ -272,7 +272,7 @@ function SchedulesTab() {
               <input className="form-input" value={leaveReason} onChange={e => setLeaveReason(e.target.value)} placeholder="e.g. Conference" />
             </div>
             <button className="btn btn-primary btn-sm" onClick={handleAddLeave} disabled={saving || !leaveDate || !leaveReason.trim()}>
-              {saving ? 'â€¦' : 'Add'}
+              {saving ? 'Ã¢â¬Â¦' : 'Add'}
             </button>
           </div>
         </div>
@@ -281,7 +281,7 @@ function SchedulesTab() {
   );
 }
 
-// â”€â”€ Users Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ã¢”â¬Ã¢”â¬ Users Tab Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬
 function UsersTab() {
   const [userList, setUserList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -333,7 +333,7 @@ function UsersTab() {
                     : <span className="badge badge-noshow">Inactive</span>}
                 </td>
                 <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: u.failedAttempts >= 5 ? 'var(--status-cancelled-text)' : 'var(--text-muted)' }}>
-                  {u.failedAttempts}/5 {u.failedAttempts >= 5 && 'ðŸ”’'}
+                  {u.failedAttempts}/5 {u.failedAttempts >= 5 && '🔒'}
                 </td>
                 <td>
                   <div style={{ display: 'flex', gap: '4px' }}>
@@ -387,7 +387,7 @@ function UserFormDrawer({ onClose }) {
           <div key={f.key} className="form-group">
             <label className="form-label">{f.label}<span className="req">*</span></label>
             <input id={f.id} className={`form-input ${errors[f.key] ? 'error' : ''}`} value={form[f.key]} onChange={e => setForm(p => ({ ...p, [f.key]: e.target.value }))} />
-            {errors[f.key] && <div className="form-error">âš  {errors[f.key]}</div>}
+            {errors[f.key] && <div className="form-error">Ã¢Å¡  {errors[f.key]}</div>}
           </div>
         ))}
         <div className="form-group">
@@ -402,18 +402,18 @@ function UserFormDrawer({ onClose }) {
         <div className="form-group">
           <label className="form-label">Initial Password<span className="req">*</span></label>
           <input type="password" className={`form-input ${errors.password ? 'error' : ''}`} value={form.password} onChange={e => setForm(p => ({ ...p, password: e.target.value }))} />
-          {errors.password && <div className="form-error">âš  {errors.password}</div>}
+          {errors.password && <div className="form-error">Ã¢Å¡  {errors.password}</div>}
         </div>
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', marginTop: '16px' }}>
           <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>
-          <button type="submit" className="btn btn-primary" disabled={saving}>{saving ? 'Creatingâ€¦' : 'Create User'}</button>
+          <button type="submit" className="btn btn-primary" disabled={saving}>{saving ? 'CreatingÃ¢â¬Â¦' : 'Create User'}</button>
         </div>
       </form>
     </Drawer>
   );
 }
 
-// â”€â”€ Audit Log Tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Ã¢”â¬Ã¢”â¬ Audit Log Tab Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬Ã¢”â¬
 function AuditTab() {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -440,13 +440,13 @@ function AuditTab() {
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       {/* Filters */}
       <div style={{ padding: '10px 16px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', gap: '8px', alignItems: 'center', flexShrink: 0, flexWrap: 'wrap' }}>
-        <input className="form-input" style={{ flex: 1, minWidth: '160px', height: '28px', fontSize: '12px' }} placeholder="Search action, entity, userâ€¦" value={filters.search} onChange={setFilter('search')} />
+        <input className="form-input" style={{ flex: 1, minWidth: '160px', height: '28px', fontSize: '12px' }} placeholder="Search action, entity, userÃ¢â¬Â¦" value={filters.search} onChange={setFilter('search')} />
         <select className="form-select" style={{ width: 'auto', height: '28px', fontSize: '12px' }} value={filters.entity} onChange={setFilter('entity')}>
           <option value="">All Entities</option>
           {['Patient','Appointment','Bill','User','Doctor'].map(e => <option key={e}>{e}</option>)}
         </select>
         <input type="date" className="form-input" style={{ width: '130px', height: '28px', fontSize: '12px' }} value={filters.dateFrom} onChange={setFilter('dateFrom')} />
-        <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>â€“</span>
+        <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Ã¢â¬“</span>
         <input type="date" className="form-input" style={{ width: '130px', height: '28px', fontSize: '12px' }} value={filters.dateTo} onChange={setFilter('dateTo')} />
         <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{logs.length} entries</span>
       </div>

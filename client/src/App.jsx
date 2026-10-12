@@ -1,4 +1,4 @@
-﻿import React from 'react';
+ï»¿import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { AppProvider } from './context/AppContext.jsx';
@@ -36,8 +36,8 @@ function RequirePermission({ children, roles }) {
   if (!user || !roles.includes(user.role)) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: '12px', padding: '40px' }}>
-        <div style={{ fontSize: '48px' }}>ðŸš«</div>
-        <div style={{ fontSize: '18px', fontWeight: 700, color: 'var(--text-primary)' }}>403 â€” Access Denied</div>
+        <div style={{ fontSize: '48px' }}>🚫</div>
+        <div style={{ fontSize: '18px', fontWeight: 700, color: 'var(--text-primary)' }}>403 Ã¢â¬” Access Denied</div>
         <div style={{ fontSize: '13px', color: 'var(--text-muted)', textAlign: 'center', maxWidth: '320px' }}>
           Your role (<strong style={{ color: 'var(--accent)' }}>{user?.role}</strong>) does not have permission to view this section.
         </div>

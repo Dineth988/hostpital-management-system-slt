@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+ï»¿import React, { useState, useEffect } from 'react';
 import { appointments as apptApi, doctors as doctorsApi, patients as patientsApi, fmt } from '../api/api.js';
 import { useApp } from '../context/AppContext.jsx';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -8,7 +8,7 @@ import { Spinner } from './PatientDrawer.jsx';
 const DAYS = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
 
 export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
-  const [step, setStep] = useState('doctor'); // doctor â†’ slot â†’ confirm
+  const [step, setStep] = useState('doctor'); // doctor → slot → confirm
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [selectedDate, setSelectedDate] = useState(todayStr());
@@ -99,7 +99,7 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
         step === 'confirm' ? (
           <>
             <button className="btn btn-secondary" onClick={() => setStep('slot')}>Back</button>
-            <button className="btn btn-primary" onClick={handleBook} disabled={saving}>{saving ? 'Bookingâ€¦' : 'Confirm Booking'}</button>
+            <button className="btn btn-primary" onClick={handleBook} disabled={saving}>{saving ? 'BookingÃ¢â¬Â¦' : 'Confirm Booking'}</button>
           </>
         ) : null
       }
@@ -135,13 +135,13 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', background: 'var(--bg-surface)', border: '1px solid var(--border-medium)', borderRadius: 'var(--radius)' }}>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: '13px', fontWeight: 500 }}>{selectedPatient.name}</div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>{selectedPatient.pid} Â· {selectedPatient.phone}</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>{selectedPatient.pid} Ã· {selectedPatient.phone}</div>
                 </div>
                 {!prePatientId && <button type="button" className="btn btn-subtle btn-sm" onClick={() => { setSelectedPatient(null); setPatientSearch(''); }}>Change</button>}
               </div>
             ) : (
               <div style={{ position: 'relative' }}>
-                <input className={`form-input ${errors.patient ? 'error' : ''}`} value={patientSearch} onChange={e => setPatientSearch(e.target.value)} placeholder="Search by name, NIC, phoneâ€¦" />
+                <input className={`form-input ${errors.patient ? 'error' : ''}`} value={patientSearch} onChange={e => setPatientSearch(e.target.value)} placeholder="Search by name, NIC, phoneÃ¢â¬Â¦" />
                 {patientResults.length > 0 && (
                   <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-medium)', borderRadius: 'var(--radius)', boxShadow: 'var(--shadow-md)', zIndex: 10, maxHeight: '200px', overflowY: 'auto', marginTop: '4px' }}>
                     {patientResults.map(p => (
@@ -150,14 +150,14 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
                         onMouseEnter={e => e.currentTarget.style.background = 'var(--bg-surface-hover)'}
                         onMouseLeave={e => e.currentTarget.style.background = 'none'}>
                         <div style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{p.name}</div>
-                        <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>{p.pid} Â· {p.phone}</div>
+                        <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>{p.pid} Ã· {p.phone}</div>
                       </button>
                     ))}
                   </div>
                 )}
               </div>
             )}
-            {errors.patient && <div className="form-error">âš  {errors.patient}</div>}
+            {errors.patient && <div className="form-error">Ã¢Å¡  {errors.patient}</div>}
           </div>
 
           {/* Doctor selection */}
@@ -172,7 +172,7 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
                     border: `1px solid ${selectedDoctor?.id === doc.id ? 'rgba(245,158,11,0.4)' : 'var(--border-medium)'}`,
                     borderRadius: 'var(--radius)', cursor: 'pointer', textAlign: 'left', transition: 'all 0.12s',
                   }}>
-                  <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--bg-surface-elevated)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', flexShrink: 0 }}>ðŸ©º</div>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--bg-surface-elevated)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', flexShrink: 0 }}>Ã°Å¸Â©Âº</div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontSize: '13px', fontWeight: 500, color: 'var(--text-primary)' }}>{doc.name}</div>
                     <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{doc.specialty}</div>
@@ -181,12 +181,12 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
                 </button>
               ))}
             </div>
-            {errors.doctor && <div className="form-error">âš  {errors.doctor}</div>}
+            {errors.doctor && <div className="form-error">Ã¢Å¡  {errors.doctor}</div>}
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <button className="btn btn-primary" onClick={() => { if (!selectedDoctor) { setErrors(e => ({ ...e, doctor: 'Select a doctor' })); return; } if (!selectedPatient) { setErrors(e => ({ ...e, patient: 'Select a patient' })); return; } setStep('slot'); }}>
-              Next: Choose Slot â†’
+              Next: Choose Slot →
             </button>
           </div>
         </div>
@@ -196,10 +196,10 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
       {step === 'slot' && (
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 12px', background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius)', marginBottom: '16px' }}>
-            <span style={{ fontSize: '16px' }}>ðŸ©º</span>
+            <span style={{ fontSize: '16px' }}>Ã°Å¸Â©Âº</span>
             <div>
               <div style={{ fontSize: '13px', fontWeight: 500 }}>{selectedDoctor.name}</div>
-              <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{selectedDoctor.specialty} Â· LKR {selectedDoctor.consultFee.toLocaleString()}</div>
+              <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{selectedDoctor.specialty} Ã· LKR {selectedDoctor.consultFee.toLocaleString()}</div>
             </div>
           </div>
 
@@ -248,14 +248,14 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
                   </button>
                 ))}
               </div>
-              {errors.slot && <div className="form-error" style={{ marginTop: '8px' }}>âš  {errors.slot}</div>}
+              {errors.slot && <div className="form-error" style={{ marginTop: '8px' }}>Ã¢Å¡  {errors.slot}</div>}
             </div>
           )}
 
           <div style={{ display: 'flex', gap: '8px', marginTop: '20px', justifyContent: 'space-between' }}>
-            <button className="btn btn-secondary" onClick={() => setStep('doctor')}>â† Back</button>
+            <button className="btn btn-secondary" onClick={() => setStep('doctor')}>←
             <button className="btn btn-primary" onClick={() => { if (!selectedSlot) { setErrors(e => ({ ...e, slot: 'Select a time slot' })); return; } setStep('confirm'); }}>
-              Next: Confirm â†’
+              Next: Confirm →
             </button>
           </div>
         </div>
@@ -282,7 +282,7 @@ export default function AppointmentDrawer({ onClose, onBooked, prePatientId }) {
 
           <div className="form-group">
             <label className="form-label">Reason / Notes</label>
-            <input className="form-input" value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. Follow-up, Consultationâ€¦" />
+            <input className="form-input" value={reason} onChange={e => setReason(e.target.value)} placeholder="e.g. Follow-up, ConsultationÃ¢â¬Â¦" />
           </div>
 
           <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '16px', padding: '10px 12px', background: 'var(--accent-subtle)', border: '1px solid rgba(245,158,11,0.2)', borderRadius: 'var(--radius)' }}>

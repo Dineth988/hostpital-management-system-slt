@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+ï»¿import React, { useState, useEffect, useCallback } from 'react';
 import { bills as billsApi, patients as patientsApi, fmt } from '../api/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useApp } from '../context/AppContext.jsx';
@@ -49,7 +49,7 @@ export default function BillingPage() {
           <option value="PAID">Paid</option>
           <option value="">All</option>
         </select>
-        <button className="btn btn-subtle btn-sm" onClick={load}>â†º Refresh</button>
+        <button className="btn btn-subtle btn-sm" onClick={load}>Ã¢â Âº Refresh</button>
       </div>
 
       {/* List */}
@@ -58,7 +58,7 @@ export default function BillingPage() {
           <div style={{ padding: '40px', display: 'flex', justifyContent: 'center' }}><Spinner /></div>
         ) : bills.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '60px', color: 'var(--text-muted)' }}>
-            <div style={{ fontSize: '32px', marginBottom: '8px' }}>ðŸŽ‰</div>
+            <div style={{ fontSize: '32px', marginBottom: '8px' }}>🎉</div>
             <div style={{ fontSize: '13px' }}>No bills in this queue</div>
           </div>
         ) : (
@@ -82,18 +82,18 @@ export default function BillingPage() {
                 return (
                   <tr key={bill.id} className="clickable" onClick={() => openDrawer('bill-detail', { billId: bill.id, onUpdate: load })}>
                     <td style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-secondary)' }}>{bill.invoiceNo}</td>
-                    <td style={{ fontWeight: 500 }}>{patient?.name || 'â€”'}</td>
+                    <td style={{ fontWeight: 500 }}>{patient?.name || 'Ã¢â¬”'}</td>
                     <td style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{fmt.date(bill.createdAt)}</td>
                     <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px' }}>{fmt.lkr(bill.total)}</td>
                     <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--status-checkedin-text)' }}>{fmt.lkr(bill.amountPaid)}</td>
                     <td style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: balance > 0 ? 700 : 400, color: balance > 0 ? 'var(--status-unpaid-text)' : 'var(--text-muted)' }}>
-                      {balance > 0 ? fmt.lkr(balance) : 'â€”'}
+                      {balance > 0 ? fmt.lkr(balance) : 'Ã¢â¬”'}
                     </td>
                     <td><BillStatusBadge status={bill.status} /></td>
                     <td onClick={e => e.stopPropagation()}>
                       {can('bill:pay') && bill.status !== 'PAID' && bill.status !== 'VOID' && (
                         <button className="btn btn-primary btn-sm" onClick={() => openDrawer('bill-detail', { billId: bill.id, onUpdate: load })}>
-                          Pay â†’
+                          Pay Ã¢â â
                         </button>
                       )}
                     </td>

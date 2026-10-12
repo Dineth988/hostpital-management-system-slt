@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+ï»¿import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useApp } from '../context/AppContext.jsx';
 
@@ -32,7 +32,7 @@ export default function ChangePasswordPage() {
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-app)', padding: '20px' }}>
       <div style={{ width: '100%', maxWidth: '400px' }}>
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-          <div style={{ fontSize: '24px', marginBottom: '4px' }}>ðŸ”</div>
+          <div style={{ fontSize: '24px', marginBottom: '4px' }}>🔒</div>
           <h1 style={{ fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)' }}>Change Password Required</h1>
           <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>Your account requires a password change before continuing.</p>
         </div>
@@ -48,11 +48,11 @@ export default function ChangePasswordPage() {
                 <label className="form-label">{f.label}<span className="req">*</span></label>
                 <input type="password" className={`form-input ${errors[f.key] ? 'error' : ''}`}
                   value={form[f.key]} onChange={e => { setForm(p => ({ ...p, [f.key]: e.target.value })); setErrors(err => { const n = { ...err }; delete n[f.key]; return n; }); }} />
-                {errors[f.key] && <div className="form-error">âš  {errors[f.key]}</div>}
+                {errors[f.key] && <div className="form-error">Ã¢Å¡  {errors[f.key]}</div>}
               </div>
             ))}
             <button type="submit" className="btn btn-primary" style={{ width: '100%', height: '36px' }} disabled={saving}>
-              {saving ? 'Changingâ€¦' : 'Change Password'}
+              {saving ? 'ChangingÃ¢â¬Â¦' : 'Change Password'}
             </button>
           </form>
           <button onClick={handleLogout} className="btn btn-subtle" style={{ width: '100%', marginTop: '8px', fontSize: '12px', color: 'var(--text-muted)' }}>Sign out instead</button>

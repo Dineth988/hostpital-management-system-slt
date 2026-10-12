@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef, useCallback } from 'react';
+ï»¿import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { patients as patientsApi, appointments, doctors } from '../api/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useApp } from '../context/AppContext.jsx';
@@ -13,9 +13,9 @@ export default function CommandBar({ onClose }) {
   const { openDrawer } = useApp();
 
   const ACTIONS = [
-    can('patient:create') && { type: 'action', label: 'New Patient', icon: 'ðŸ‘¤', action: () => { openDrawer('new-patient'); onClose(); } },
-    can('appointment:create') && { type: 'action', label: 'Book Appointment', icon: 'ðŸ“…', action: () => { openDrawer('new-appointment'); onClose(); } },
-    can('bill:pay') && { type: 'action', label: 'Payment Queue', icon: 'ðŸ’³', action: () => { window.location.hash = '#billing'; onClose(); } },
+    can('patient:create') && { type: 'action', label: 'New Patient', icon: '👤', action: () => { openDrawer('new-patient'); onClose(); } },
+    can('appointment:create') && { type: 'action', label: 'Book Appointment', icon: 'Ã°Å¸“…', action: () => { openDrawer('new-appointment'); onClose(); } },
+    can('bill:pay') && { type: 'action', label: 'Payment Queue', icon: '💳', action: () => { window.location.hash = '#billing'; onClose(); } },
   ].filter(Boolean);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function CommandBar({ onClose }) {
     try {
       const pts = await patientsApi.list({ search: q });
       const patientResults = pts.slice(0, 6).map(p => ({
-        type: 'patient', label: p.name, sub: `${p.pid} Â· ${p.phone}`,
+        type: 'patient', label: p.name, sub: `${p.pid} Ã· ${p.phone}`,
         active: p.active,
         action: () => { openDrawer('patient-detail', { patientId: p.id }); onClose(); },
       }));
@@ -72,7 +72,7 @@ export default function CommandBar({ onClose }) {
             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
           </svg>
           <input ref={inputRef} value={query} onChange={e => setQuery(e.target.value)} onKeyDown={handleKeyDown}
-            placeholder="Search patient by name, NIC, phone, IDâ€¦ or type an action"
+            placeholder="Search patient by name, NIC, phone, ID… or type an action"
             style={{
               flex: 1, background: 'none', border: 'none', outline: 'none',
               color: 'var(--text-primary)', fontSize: '14px', fontFamily: 'var(--font-sans)',
@@ -103,7 +103,7 @@ export default function CommandBar({ onClose }) {
               }}
               onMouseEnter={() => setSelectedIdx(i)}>
               <span style={{ fontSize: '16px', flexShrink: 0 }}>
-                {r.type === 'patient' ? 'ðŸ‘¤' : (r.icon || 'âš¡')}
+                {r.type === 'patient' ? '👤' : (r.icon || '⚡')}
               </span>
               <span style={{ flex: 1 }}>
                 <span style={{
@@ -119,8 +119,8 @@ export default function CommandBar({ onClose }) {
 
         {/* Footer hints */}
         <div style={{ padding: '8px 16px', borderTop: '1px solid var(--border-subtle)', display: 'flex', gap: '16px', fontSize: '11px', color: 'var(--text-muted)' }}>
-          <span><kbd className="kbd">â†‘â†“</kbd> navigate</span>
-          <span><kbd className="kbd">â†µ</kbd> select</span>
+          <span><kbd className="kbd">↑↓</kbd> navigate</span>
+          <span><kbd className="kbd">⏎</kbd> select</span>
           <span><kbd className="kbd">Esc</kbd> close</span>
         </div>
       </div>

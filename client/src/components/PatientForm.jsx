@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+ï»¿import React, { useState, useEffect } from 'react';
 import { fmt } from '../api/api.js';
 
 const REQUIRED_FIELDS = ['name', 'dob', 'gender', 'phone'];
@@ -72,7 +72,7 @@ export default function PatientForm({ initial = {}, onSave, onCancel }) {
         {label}{req && <span className="req">*</span>}
       </label>
       {children}
-      {error && <div className="form-error">âš  {error}</div>}
+      {error && <div className="form-error">Ã¢Å¡  {error}</div>}
     </div>
   );
 
@@ -97,7 +97,7 @@ export default function PatientForm({ initial = {}, onSave, onCancel }) {
 
         <Field label="Gender" id="pt-gender" req error={errors.gender}>
           <select id="pt-gender" className={`form-select ${errors.gender ? 'error' : ''}`} value={form.gender} onChange={set('gender')}>
-            <option value="">Selectâ€¦</option>
+            <option value="">SelectÃ¢â¬Â¦</option>
             <option value="M">Male</option>
             <option value="F">Female</option>
             <option value="O">Other</option>
@@ -136,7 +136,7 @@ export default function PatientForm({ initial = {}, onSave, onCancel }) {
             </Field>
             <Field label="Relation" id="pt-grel" error={errors.guardianRelation}>
               <select id="pt-grel" className="form-select" value={form.guardianRelation} onChange={set('guardianRelation')}>
-                <option value="">Selectâ€¦</option>
+                <option value="">SelectÃ¢â¬Â¦</option>
                 <option>Father</option><option>Mother</option><option>Guardian</option><option>Other</option>
               </select>
             </Field>
@@ -146,7 +146,7 @@ export default function PatientForm({ initial = {}, onSave, onCancel }) {
 
       <div style={{ display: 'flex', gap: '8px', marginTop: '20px', justifyContent: 'flex-end' }}>
         <button type="button" className="btn btn-secondary" onClick={onCancel} disabled={saving}>Cancel</button>
-        <button type="submit" className="btn btn-primary" disabled={saving}>{saving ? 'Savingâ€¦' : 'Save Patient'}</button>
+        <button type="submit" className="btn btn-primary" disabled={saving}>{saving ? 'SavingÃ¢â¬Â¦' : 'Save Patient'}</button>
       </div>
     </form>
   );

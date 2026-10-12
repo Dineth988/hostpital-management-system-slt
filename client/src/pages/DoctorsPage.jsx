@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+ï»¿import React, { useState, useEffect } from 'react';
 import { doctors as doctorsApi, fmt } from '../api/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useApp } from '../context/AppContext.jsx';
@@ -36,7 +36,7 @@ export default function DoctorsPage() {
               }}>
                 <div style={{ padding: '14px', borderBottom: '1px solid var(--border-subtle)' }}>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                    <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--accent-muted)', border: '1px solid rgba(245,158,11,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', flexShrink: 0 }}>ðŸ©º</div>
+                    <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--accent-muted)', border: '1px solid rgba(245,158,11,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px', flexShrink: 0 }}>🩺</div>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '2px' }}>{doc.name}</div>
                       <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{doc.specialty}</div>
@@ -47,14 +47,14 @@ export default function DoctorsPage() {
                 </div>
 
                 <div style={{ padding: '10px 14px' }}>
-                  <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '6px' }}>Schedule Â· {doc.slotMinutes}min slots</div>
+                  <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)', fontWeight: 600, marginBottom: '6px' }}>Schedule Ã· {doc.slotMinutes}min slots</div>
                   <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
                     {DAYS_ORDER.map(day => {
                       const h = doc.schedule[day];
                       return h ? (
                         <div key={day} style={{ fontSize: '11px', padding: '3px 8px', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-subtle)', borderRadius: '4px', fontFamily: 'var(--font-mono)' }}>
                           <span style={{ fontWeight: 700, color: 'var(--text-secondary)' }}>{day.slice(0,2)}</span>
-                          <span style={{ color: 'var(--text-muted)', marginLeft: '4px' }}>{h[0]}â€“{h[1]}</span>
+                          <span style={{ color: 'var(--text-muted)', marginLeft: '4px' }}>{h[0]}Ã¢â¬“{h[1]}</span>
                         </div>
                       ) : (
                         <div key={day} style={{ fontSize: '11px', padding: '3px 6px', color: 'var(--text-disabled)', borderRadius: '4px' }}>{day.slice(0,2)}</div>

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+ï»¿import React, { useState, useEffect } from 'react';
 import { bills as billsApi, patients as patientsApi, doctors as doctorsApi, fmt } from '../api/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useApp } from '../context/AppContext.jsx';
@@ -154,7 +154,7 @@ export default function BillDrawer({ billId, onClose, onUpdate }) {
             ))}
             <div style={{ borderTop: '1px solid var(--border-medium)', display: 'flex', flexDirection: 'column', gap: '4px', padding: '8px 12px' }}>
               <Row label="Subtotal" value={fmt.lkr(bill.subtotal)} />
-              {bill.discount > 0 && <Row label={`Discount (${bill.discountReason})`} value={`âˆ’ ${fmt.lkr(bill.discount)}`} color="var(--status-checkedin-text)" />}
+              {bill.discount > 0 && <Row label={`Discount (${bill.discountReason})`} value={`Ã¢Ëâ ${fmt.lkr(bill.discount)}`} color="var(--status-checkedin-text)" />}
               <Row label="Total" value={fmt.lkr(bill.total)} bold />
               <Row label="Paid" value={fmt.lkr(bill.amountPaid)} color="var(--status-checkedin-text)" />
               {balance > 0.01 && <Row label="Balance Due" value={fmt.lkr(balance)} color="var(--status-unpaid-text)" bold />}
@@ -202,9 +202,9 @@ export default function BillDrawer({ billId, onClose, onUpdate }) {
                 </select>
               </div>
             </div>
-            {payErr && <div className="form-error" style={{ marginBottom: '8px' }}>âš  {payErr}</div>}
+            {payErr && <div className="form-error" style={{ marginBottom: '8px' }}>Ã¢Å¡  {payErr}</div>}
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-              <button className="btn btn-primary btn-sm" onClick={handlePay} disabled={paying}>{paying ? 'Processingâ€¦' : `Pay ${payAmount ? fmt.lkr(parseFloat(payAmount) || 0) : ''}`.trim()}</button>
+              <button className="btn btn-primary btn-sm" onClick={handlePay} disabled={paying}>{paying ? 'ProcessingÃ¢â¬Â¦' : `Pay ${payAmount ? fmt.lkr(parseFloat(payAmount) || 0) : ''}`.trim()}</button>
               <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Balance after: <strong style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-primary)' }}>{fmt.lkr(Math.max(0, balance - (parseFloat(payAmount) || 0)))}</strong></span>
             </div>
           </Section>
@@ -223,8 +223,8 @@ export default function BillDrawer({ billId, onClose, onUpdate }) {
                 <input className="form-input" value={discountReason} onChange={e => { setDiscountReason(e.target.value); setDiscountErr(''); }} placeholder="e.g. Senior citizen discount" />
               </div>
             </div>
-            {discountErr && <div className="form-error" style={{ marginBottom: '8px' }}>âš  {discountErr}</div>}
-            <button className="btn btn-secondary btn-sm" onClick={handleDiscount} disabled={applyingDiscount}>{applyingDiscount ? 'Applyingâ€¦' : 'Apply Discount'}</button>
+            {discountErr && <div className="form-error" style={{ marginBottom: '8px' }}>Ã¢Å¡  {discountErr}</div>}
+            <button className="btn btn-secondary btn-sm" onClick={handleDiscount} disabled={applyingDiscount}>{applyingDiscount ? 'ApplyingÃ¢â¬Â¦' : 'Apply Discount'}</button>
           </Section>
         )}
 
@@ -233,7 +233,7 @@ export default function BillDrawer({ billId, onClose, onUpdate }) {
           <Section title="Void Bill">
             <div style={{ display: 'flex', gap: '8px' }}>
               <input className="form-input" value={voidReason} onChange={e => setVoidReason(e.target.value)} placeholder="Reason for void (required)" style={{ flex: 1 }} />
-              <button className="btn btn-danger btn-sm" onClick={handleVoid} disabled={voiding || !voidReason.trim()}>{voiding ? 'â€¦' : 'Void'}</button>
+              <button className="btn btn-danger btn-sm" onClick={handleVoid} disabled={voiding || !voidReason.trim()}>{voiding ? 'Ã¢â¬Â¦' : 'Void'}</button>
             </div>
           </Section>
         )}
@@ -243,13 +243,13 @@ export default function BillDrawer({ billId, onClose, onUpdate }) {
           <Section title="Process Refund">
             <div style={{ display: 'flex', gap: '8px' }}>
               <input className="form-input" value={refundReason} onChange={e => setRefundReason(e.target.value)} placeholder="Reason for refund (required)" style={{ flex: 1 }} />
-              <button className="btn btn-danger btn-sm" onClick={handleRefund} disabled={refunding || !refundReason.trim()}>{refunding ? 'â€¦' : 'Refund'}</button>
+              <button className="btn btn-danger btn-sm" onClick={handleRefund} disabled={refunding || !refundReason.trim()}>{refunding ? 'Ã¢â¬Â¦' : 'Refund'}</button>
             </div>
           </Section>
         )}
 
         <button className="btn btn-subtle btn-sm" onClick={printReceipt} style={{ marginTop: '8px' }}>
-          ðŸ–¨ Print Receipt
+          🖨 Print Receipt
         </button>
       </div>
     </Drawer>

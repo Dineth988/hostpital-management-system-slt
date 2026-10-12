@@ -181,3 +181,101 @@ INSERT INTO audit_log(user_id, user_name, action, entity, entity_id, detail) VAL
   ('a1000000-0000-0000-0000-000000000001'::uuid, 'Priya Mendis', 'USER_LOGIN',       'User',    'a1000000-0000-0000-0000-000000000001', 'Logged in'),
   ('a3000000-0000-0000-0000-000000000003'::uuid, 'Kasun Perera', 'PAYMENT_RECORDED', 'Bill',    NULL, 'Seed payment entry')
 ON CONFLICT DO NOTHING;
+
+-- ============================================================
+-- APPOINTMENTS  (use CURRENT_DATE so Today board shows data)
+-- ============================================================
+INSERT INTO appointments(id, patient_id, doctor_id, date, time, end_time, status, walk_in, reason) VALUES
+  -- Dr. Amal Silva today
+  ('b1000000-0000-0000-0000-000000000001'::uuid,
+   (SELECT id FROM patients WHERE pid='P-000001'),
+   'd1000000-0000-0000-0000-000000000001'::uuid,
+   CURRENT_DATE, '09:00', '09:15', 'CHECKED_IN', false, 'Routine check-up'),
+
+  ('b2000000-0000-0000-0000-000000000002'::uuid,
+   (SELECT id FROM patients WHERE pid='P-000002'),
+   'd1000000-0000-0000-0000-000000000001'::uuid,
+   CURRENT_DATE, '09:15', '09:30', 'SCHEDULED',  false, 'Follow-up visit'),
+
+  ('b3000000-0000-0000-0000-000000000003'::uuid,
+   (SELECT id FROM patients WHERE pid='P-000003'),
+   'd1000000-0000-0000-0000-000000000001'::uuid,
+   CURRENT_DATE, '09:30', '09:45', 'COMPLETED',  false, 'Blood pressure review'),
+
+  -- Dr. Nimal Raj today
+  ('b4000000-0000-0000-0000-000000000004'::uuid,
+   (SELECT id FROM patients WHERE pid='P-000005'),
+   'd2000000-0000-0000-0000-000000000002'::uuid,
+   CURRENT_DATE, '10:00', '10:15', 'SCHEDULED',  false, 'Cardiac consultation'),
+
+  ('b5000000-0000-0000-0000-000000000005'::uuid,
+   (SELECT id FROM patients WHERE pid='P-000007'),
+   'd2000000-0000-0000-0000-000000000002'::uuid,
+   CURRENT_DATE, '10:15', '10:30', 'CHECKED_IN', true,  'Chest pain, walk-in'),
+
+  -- Dr. Amal Silva yesterday (history)
+  ('b6000000-0000-0000-0000-000000000006'::uuid,
+   (SELECT id FROM patients WHERE pid='P-000004'),
+   'd1000000-0000-0000-0000-000000000001'::uuid,
+   CURRENT_DATE - 1, '11:00', '11:15', 'COMPLETED', false, 'Paediatric review')
+ON CONFLICT DO NOTHING;
+
+-- ============================================================
+-- BILLS  (for CHECKED_IN and COMPLETED appointments)
+-- ============================================================
+INSERT INTO bills(id, invoice_no, patient_id, appointment_id, doctor_id, line_items, subtotal, discount, total, amount_paid, status) VALUES
+  -- Bill for b1 (CHECKED_IN - unpaid, in billing queue)
+  ('c1000000-0000-0000-0000-000000000001'::uuid, 'INV-2026-000001',
+   (SELECT id FROM patients WHERE pid='P-000001'),
+   'b1000000-0000-0000-0000-000000000001'::uuid,
+   'd1000000-0000-0000-0000-000000000001'::uuid,
+   '[{"desc":"Consultation Fee","amount":1500.00}]',
+   1500.00, 0, 1500.00, 0, 'UNPAID'),
+
+  -- Bill for b3 (COMPLETED - paid)
+  ('c2000000-0000-0000-0000-000000000002'::uuid, 'INV-2026-000002',
+   (SELECT id FROM patients WHERE pid='P-000003'),
+   'b3000000-0000-0000-0000-000000000003'::uuid,
+   'd1000000-0000-0000-0000-000000000001'::uuid,
+   '[{"desc":"Consultation Fee","amount":1500.00}]',
+   1500.00, 0, 1500.00, 1500.00, 'PAID'),
+
+  -- Bill for b5 (CHECKED_IN walk-in - unpaid, in billing queue)
+  ('c3000000-0000-0000-0000-000000000003'::uuid, 'INV-2026-000003',
+   (SELECT id FROM patients WHERE pid='P-000007'),
+   'b5000000-0000-0000-0000-000000000005'::uuid,
+   'd2000000-0000-0000-0000-000000000002'::uuid,
+   '[{"desc":"Consultation Fee","amount":3000.00}]',
+   3000.00, 0, 3000.00, 0, 'UNPAID'),
+
+  -- Bill for b6 (yesterday COMPLETED - partially paid)
+  ('c4000000-0000-0000-0000-000000000004'::uuid, 'INV-2026-000004',
+   (SELECT id FROM patients WHERE pid='P-000004'),
+   'b6000000-0000-0000-0000-000000000006'::uuid,
+   'd1000000-0000-0000-0000-000000000001'::uuid,
+   '[{"desc":"Consultation Fee","amount":1500.00},{"desc":"Lab Test","amount":800.00}]',
+   2300.00, 200, 2100.00, 1000.00, 'PARTIAL')
+ON CONFLICT DO NOTHING;
+
+-- Link bill_id back to checked-in / completed appointments
+UPDATE appointments SET bill_id = 'c1000000-0000-0000-0000-000000000001'::uuid
+  WHERE id = 'b1000000-0000-0000-0000-000000000001'::uuid;
+UPDATE appointments SET bill_id = 'c2000000-0000-0000-0000-000000000002'::uuid
+  WHERE id = 'b3000000-0000-0000-0000-000000000003'::uuid;
+UPDATE appointments SET bill_id = 'c3000000-0000-0000-0000-000000000003'::uuid
+  WHERE id = 'b5000000-0000-0000-0000-000000000005'::uuid;
+UPDATE appointments SET bill_id = 'c4000000-0000-0000-0000-000000000004'::uuid
+  WHERE id = 'b6000000-0000-0000-0000-000000000006'::uuid;
+
+-- ============================================================
+-- PAYMENTS
+-- ============================================================
+INSERT INTO payments(bill_id, amount, method, receipt_no) VALUES
+  ('c2000000-0000-0000-0000-000000000002'::uuid, 1500.00, 'CASH',     'RCP-2026-000001'),
+  ('c4000000-0000-0000-0000-000000000004'::uuid, 1000.00, 'CARD',     'RCP-2026-000002')
+ON CONFLICT DO NOTHING;
+
+-- Advance invoice/receipt sequences
+SELECT setval('invoice_seq', 10);
+SELECT setval('receipt_seq', 10);
+

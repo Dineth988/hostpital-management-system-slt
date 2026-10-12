@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+ï»¿import React, { useState, useEffect } from 'react';
 import { patients as patientsApi, fmt } from '../api/api.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useApp } from '../context/AppContext.jsx';
@@ -108,7 +108,7 @@ function PatientInfoTab({ patient }) {
     { label: 'Patient ID', value: patient.pid, mono: true },
     { label: 'Date of Birth', value: `${fmt.date(patient.dob)} (${fmt.age(patient.dob)})` },
     { label: 'Gender', value: patient.gender === 'M' ? 'Male' : patient.gender === 'F' ? 'Female' : 'Other' },
-    { label: 'NIC', value: patient.nic || 'â€”', mono: true },
+    { label: 'NIC', value: patient.nic || '—', mono: true },
     { label: 'Phone', value: patient.phone, mono: true },
     { label: 'Address', value: patient.address },
     { label: 'Registered', value: fmt.date(patient.createdAt) },
@@ -132,7 +132,7 @@ function PatientInfoTab({ patient }) {
         <div style={{ background: 'var(--accent-subtle)', border: '1px solid rgba(245,158,11,0.2)', borderRadius: 'var(--radius)', padding: '10px 12px' }}>
           <div style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--accent)', fontWeight: 700, marginBottom: '6px' }}>Guardian (Minor)</div>
           <div style={{ fontSize: '13px', color: 'var(--text-primary)' }}>{patient.guardian.name}</div>
-          <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>{patient.guardian.phone} Â· {patient.guardian.relation}</div>
+          <div style={{ fontSize: '12px', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>{patient.guardian.phone} Ã· {patient.guardian.relation}</div>
         </div>
       )}
     </div>
@@ -155,7 +155,7 @@ export function Spinner({ size = 24 }) {
 export function EmptyState({ message = 'No data', icon }) {
   return (
     <div style={{ textAlign: 'center', padding: '40px 20px', color: 'var(--text-muted)' }}>
-      <div style={{ fontSize: '32px', marginBottom: '8px' }}>{icon || 'ðŸ“­'}</div>
+      <div style={{ fontSize: '32px', marginBottom: '8px' }}>{icon || 'Ã°Å¸“Â­'}</div>
       <div style={{ fontSize: '13px' }}>{message}</div>
     </div>
   );
