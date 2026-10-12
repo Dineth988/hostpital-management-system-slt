@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // api.js â€” Real HTTP client for HMS REST API
 // Mirrors the same export shape as mock.js so all pages
 // work without changes after updating the import.
@@ -6,6 +6,21 @@
 
 const BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000/api/v1';
 
+// -- snake_case -> camelCase transformer (Postgres returns snake_case) -----
+function toCamel(s) {
+  return s.replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+}
+function deepCamel(obj) {
+  if (Array.isArray(obj)) return obj.map(deepCamel);
+  if (obj !== null && typeof obj === 'object' && !(obj instanceof Date)) {
+    return Object.fromEntries(
+      Object.entries(obj).map(([k, v]) => [toCamel(k), deepCamel(v)])
+    );
+  }
+  return obj;
+}
+
+// -- Token storage ----------------------------------------------------------
 // â”€â”€ Token storage â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let _token = sessionStorage.getItem('hms_token') || null;
 
@@ -35,7 +50,7 @@ async function request(method, path, body) {
     err.fieldErrors = data.fieldErrors || {};
     throw err;
   }
-  return data;
+  return deepCamel(data);
 }
 
 const get    = (path)        => request('GET',    path);

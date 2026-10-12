@@ -144,21 +144,21 @@ CREATE INDEX IF NOT EXISTS idx_audit_ts      ON audit_log(ts DESC);
 
 -- Doctors (insert first so we can ref doctor_id in users)
 INSERT INTO doctors(id, name, specialty, consult_fee, schedule, slot_minutes) VALUES
-  ('d1000000-0000-0000-0000-000000000001', 'Dr. Amal Silva',      'General Medicine', 1500.00,
+  ('d1000000-0000-0000-0000-000000000001'::uuid, 'Dr. Amal Silva',      'General Medicine', 1500.00,
    '{"MON":["09:00","17:00"],"TUE":["09:00","17:00"],"WED":["09:00","13:00"],"THU":["09:00","17:00"],"FRI":["09:00","17:00"]}', 15),
-  ('d1000000-0000-0000-0000-000000000002', 'Dr. Nimal Raj',       'Cardiology',       3000.00,
+  ('d2000000-0000-0000-0000-000000000002'::uuid, 'Dr. Nimal Raj',       'Cardiology',       3000.00,
    '{"MON":["10:00","16:00"],"WED":["10:00","16:00"],"FRI":["10:00","16:00"]}', 15),
-  ('d1000000-0000-0000-0000-000000000003', 'Dr. Chamari Perera',  'Pediatrics',       2000.00,
+  ('d3000000-0000-0000-0000-000000000003'::uuid, 'Dr. Chamari Perera',  'Pediatrics',       2000.00,
    '{"TUE":["08:00","14:00"],"THU":["08:00","14:00"],"SAT":["08:00","12:00"]}', 15)
 ON CONFLICT DO NOTHING;
 
 -- Users (bcrypt hash of 'pass123')
 INSERT INTO users(id, name, username, password_hash, role, force_pw_change, failed_attempts, doctor_id) VALUES
-  ('u1000000-0000-0000-0000-000000000001', 'Priya Mendis',   'priya', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'RECEPTIONIST', false, 0, NULL),
-  ('u1000000-0000-0000-0000-000000000002', 'Dr. Amal Silva', 'amal',  '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'DOCTOR',       false, 0, 'd1000000-0000-0000-0000-000000000001'),
-  ('u1000000-0000-0000-0000-000000000003', 'Kasun Perera',   'kasun', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'CASHIER',      false, 0, NULL),
-  ('u1000000-0000-0000-0000-000000000004', 'Admin User',     'admin', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'ADMIN',        false, 0, NULL),
-  ('u1000000-0000-0000-0000-000000000005', 'Dr. Nimal Raj',  'nimal', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'DOCTOR',       false, 0, 'd1000000-0000-0000-0000-000000000002')
+  ('a1000000-0000-0000-0000-000000000001'::uuid, 'Priya Mendis',   'priya', '$2b$10$mJcnv1HAyEECy1SWSNj2TO47CFmUBAwUjHJFef0pnQEhGWaQjUvqO', 'RECEPTIONIST', false, 0, NULL),
+  ('a2000000-0000-0000-0000-000000000002'::uuid, 'Dr. Amal Silva', 'amal',  '$2b$10$mJcnv1HAyEECy1SWSNj2TO47CFmUBAwUjHJFef0pnQEhGWaQjUvqO', 'DOCTOR',       false, 0, 'd1000000-0000-0000-0000-000000000001'::uuid),
+  ('a3000000-0000-0000-0000-000000000003'::uuid, 'Kasun Perera',   'kasun', '$2b$10$mJcnv1HAyEECy1SWSNj2TO47CFmUBAwUjHJFef0pnQEhGWaQjUvqO', 'CASHIER',      false, 0, NULL),
+  ('a4000000-0000-0000-0000-000000000004'::uuid, 'Admin User',     'admin', '$2b$10$mJcnv1HAyEECy1SWSNj2TO47CFmUBAwUjHJFef0pnQEhGWaQjUvqO', 'ADMIN',        false, 0, NULL),
+  ('a5000000-0000-0000-0000-000000000005'::uuid, 'Dr. Nimal Raj',  'nimal', '$2b$10$mJcnv1HAyEECy1SWSNj2TO47CFmUBAwUjHJFef0pnQEhGWaQjUvqO', 'DOCTOR',       false, 0, 'd2000000-0000-0000-0000-000000000002'::uuid)
 ON CONFLICT DO NOTHING;
 
 -- Patients
@@ -177,7 +177,7 @@ SELECT setval('patient_seq', 12);
 
 -- Audit log seed entries
 INSERT INTO audit_log(user_id, user_name, action, entity, entity_id, detail) VALUES
-  ('u1000000-0000-0000-0000-000000000004', 'Admin User',   'PATIENT_CREATED',  'Patient', 'P-000007', 'Created patient P-000007'),
-  ('u1000000-0000-0000-0000-000000000001', 'Priya Mendis', 'USER_LOGIN',       'User',    'u1000000-0000-0000-0000-000000000001', 'Logged in'),
-  ('u1000000-0000-0000-0000-000000000003', 'Kasun Perera', 'PAYMENT_RECORDED', 'Bill',    NULL, 'Seed payment entry')
+  ('a4000000-0000-0000-0000-000000000004'::uuid, 'Admin User',   'PATIENT_CREATED',  'Patient', 'P-000007', 'Created patient P-000007'),
+  ('a1000000-0000-0000-0000-000000000001'::uuid, 'Priya Mendis', 'USER_LOGIN',       'User',    'a1000000-0000-0000-0000-000000000001', 'Logged in'),
+  ('a3000000-0000-0000-0000-000000000003'::uuid, 'Kasun Perera', 'PAYMENT_RECORDED', 'Bill',    NULL, 'Seed payment entry')
 ON CONFLICT DO NOTHING;
